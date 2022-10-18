@@ -1,0 +1,67 @@
+
+<div class="wrapper">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">  &nbsp; &nbsp; &nbsp;Home</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/services">&nbsp; &nbsp; &nbsp;Our Services</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutus">&nbsp; &nbsp; &nbsp; Aboutus</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contactus">&nbsp; &nbsp; &nbsp; Contactus</a>
+            </li>
+            &nbsp; &nbsp; &nbsp;
+            <ng-template [ngIf]="readLocalStorageValue('role')=='Admin'">
+              <li class="nav-item">
+                <a class="nav-link" href="/roomtype">&nbsp; &nbsp; &nbsp; RoomType</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/roomDetails">&nbsp; &nbsp; &nbsp; Rooms</a>
+              </li>
+
+          </ng-template>
+           
+          </ul>
+         
+        </div>
+        <ng-template [ngIf]="readLocalStorageValue('role')=='Admin'">
+          
+          <button type="button" class="btn-primary" (click)='logout()'>Logout</button>
+      </ng-template>
+      <ng-template [ngIf]="readLocalStorageValue('role')=='User'">
+          
+        <button type="button" class="btn-primary" (click)='logoutUser()'>Logout</button>
+    </ng-template>
+    <ng-template [ngIf]="readLocalStorageValue('role')==''">
+          
+      <a class="nav-link" href="/login"><button class="btn btn-success">Get Started</button></a>
+  </ng-template>
+      </div>
+    </nav>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">yashId.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+ 
+</div>

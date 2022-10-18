@@ -1,0 +1,7 @@
+ this.login.email=this.registerForm.get("email").value
+    this.login.password=this.registerForm.get("password").value;
+	
+this.registerForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+    });

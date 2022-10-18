@@ -1,0 +1,90 @@
+
+  
+   
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8"><h2><b> Room Details</b></h2></div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-info add-new" (click)='openModel()'><i class="fa fa-plus"></i> Add New</button>
+                </div>
+            </div>
+        </div>
+     <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Capacity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let type of listOfRoomType">
+                <tr>
+                    <td>{{type.roomTypes}}</td>
+                    <td>{{type.price}}</td>
+                    <td>{{type.maxCapaity}} </td>
+                    <td>
+                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a>
+                        <a class="edit" title="Edit" data-toggle="tooltip" (click)='openModel()'><i class="material-icons"></i></a>
+                        <a class="delete" title="Delete" data-toggle="tooltip" (click)='deleteRoomType(type.roomTypeid)'><i class="material-icons"></i></a>
+                    </td>
+                </tr>
+            </ng-container>
+                 
+            </tbody>
+        </table>
+    </div>
+</div>    
+
+<div class="modal fade" #someModal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="!submitted">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Room Type</h5>
+          <button type="button" class="close" (click)='clear()' data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           
+            <form [formGroup]="addTypeForm" (ngSubmit)="save()">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="roomTypes" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.roomTypes.errors }"  id="roomTypes">
+                  <div *ngIf="submitted && f.roomTypes.errors" class="invalid-feedback">
+                    <div *ngIf="f.roomTypes.errors.required">Room Types is required</div>
+                   
+                 </div>
+                  <label for="floatingInput">New Room Type</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingmaxCapaity" placeholder="maxCapaity" formControlName="maxCapaity" [ngClass]="{ 'is-invalid': submitted && f.maxCapaity.errors }">
+                  <div *ngIf="submitted && f.maxCapaity.errors" class="invalid-feedback">
+                    <div *ngIf="f.maxCapaity.errors.required">Max Capaity is required</div>
+                 </div>
+                  <label for="floatingPassword">Max Capaity</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingmaxCapaity" placeholder="price" formControlName="price"[ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+                    <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                      <div *ngIf="f.price.errors.required">Price</div>
+                   </div>
+                    <label for="floatingPassword">Price</label>
+                  </div>
+
+                <div class="d-grid">
+                  <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-1" type="submit">Add</button>
+                </div>
+
+              </form>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,117 @@
+<br>
+<br>
+<form [formGroup]="myGroup" (ngSubmit)="bookRooms()">
+<p> Check In date </p>
+<div class="col-md-4">
+   <div class="input-group" data-provide="datepicker">
+      <input type="date" max="{{maxdate}}"  placeholder="dd-mm-yyyy" class="form-control" formControlName="checkIn">
+      <div class="input-group-addon">
+         <span class="glyphicon glyphicon-th"></span>
+      </div>
+   </div>
+</div>
+<br>
+
+<p> Check out date </p>
+<div class="col-md-4">
+   <div class="input-group date " data-provide="datepicker">
+      <input type="date" max="{{maxdate}}"   class="form-control" formControlName="checkOut">
+      <div class="input-group-addon">
+         <span class="glyphicon glyphicon-th"></span>
+      </div>
+   </div>
+</div>
+<br>
+<p> Rooms </p>
+<div class="col-md-4">
+   <div class="input-group" >
+      <input type="text" id="roomCount" class="form-control" formControlName="roomCount" [ngClass]="{ 'is-invalid': submitted && f['roomCount'].errors }" >
+      <div *ngIf="submitted && f['roomCount'].errors" class="invalid-feedback">
+         <div *ngIf="f['roomCount'].errors['required']">RoomCount is required</div>
+       </div>
+      <div class="input-group-addon">
+         
+      </div>
+   </div>
+</div>
+<br>
+<p> Select Room Type </p>
+<div class="col-md-4">
+   <div class="input-group">
+      <select class="form-control" formControlName="roomType" required>
+         <option *ngFor="let type of listOfRoomType"  
+                                        value={{type.roomTypeid}}>  
+                                    {{type.roomTypes}}  
+         </option>  
+        
+      </select>
+      
+   </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md-2">
+    <div class="input-group">
+        <button class="form-control bg-primary" type="submit">Book</button>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="input-group">
+        <button type="button" class="form-control bg-primary"(click)='clearForm()'>Clear</button>
+    </div>
+</div>
+ </div>
+ 
+    
+
+</form>
+<br>
+
+
+
+<div class="modal fade" #someModal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="!submitted">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Booking Details</h5>
+        <button type="button" class="close" (click)='closePopup()' data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="comeBack_up" *ngIf="(objRoomDetails | json) != '{}'">
+            <div *ngFor='let obj of objRoomDetails'>
+
+              <ul class="list-group">
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                  User Id
+                 <span class=" badge-primary badge-pill"><b>{{userId}}</b></span>
+               </li>
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Room Types
+                 <span class="badge-primary badge-pill"><b>{{obj.roomTypes}}</b></span>
+               </li>
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                Total Amount
+                 <span class=" badge-primary badge-pill"><b>{{obj.totalAmount}}</b></span>
+               </li>
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Room Count
+                   <span class=" badge-primary badge-pill"><b>{{obj.roomCount}}</b></span>
+                 </li>
+             </ul>
+
+          
+              
+            </div>
+         
+         </div>  
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-primary" (click)='closePopup()'>Print</button>
+        <button type="button" class="btn btn-primary" (click)='closePopup()'>OK</button>
+      </div>
+    </div>
+  </div>
+</div>
