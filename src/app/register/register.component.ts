@@ -70,7 +70,7 @@ registerObj:RegisterDTO;
       error => {
        console.log(error);
       });
-  }
+    }
 
   }
 

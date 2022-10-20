@@ -6,14 +6,14 @@ import { roomType } from './room/roomType';
 import { roomDetails } from './room/room.details';
 import { RoomInfoDTO } from './roomdetails/RoomInfoDTO';
 import { AddDetails } from './roomdetails/AddDetails';
+import { BookedInfo } from './room/BookedDetails';
+import { SearchBookResult } from './room/SearchBookResult';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomerviceService {
   
- 
- 
 private url:string='';
 private status:string='';
 headers={
@@ -50,6 +50,12 @@ headers={
   deleteRoom(roomId: number) {
     return this.http.delete<any>(this.url+"/deleteRoom/" + roomId);
   }
- 
   
+  searchRoom(bookedInfo: BookedInfo):Observable<SearchBookResult[]> {
+    return this.http.post<SearchBookResult[]>(this.url+"/searchRoom",bookedInfo);
+  }
+  bookSearchedRoom(bookedInfo: BookedInfo) :Observable<SearchBookResult[]> {
+    return this.http.post<SearchBookResult[]>(this.url+"/bookDetails",bookedInfo);
+  }
+ 
 }

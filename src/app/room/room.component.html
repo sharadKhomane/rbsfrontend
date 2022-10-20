@@ -1,8 +1,12 @@
 <br>
-<br>
+<div class="container">
+<div class="search">
+   <div class="col-sm-8"><h4><b>  </b></h4></div>
+
+   <br>
 <form [formGroup]="myGroup" (ngSubmit)="bookRooms()">
 <p> Check In date </p>
-<div class="col-md-4">
+<div class="col-md-8">
    <div class="input-group" data-provide="datepicker">
       <input type="date" max="{{maxdate}}"  placeholder="dd-mm-yyyy" class="form-control" formControlName="checkIn">
       <div class="input-group-addon">
@@ -13,7 +17,7 @@
 <br>
 
 <p> Check out date </p>
-<div class="col-md-4">
+<div class="col-md-8">
    <div class="input-group date " data-provide="datepicker">
       <input type="date" max="{{maxdate}}"   class="form-control" formControlName="checkOut">
       <div class="input-group-addon">
@@ -23,7 +27,7 @@
 </div>
 <br>
 <p> Rooms </p>
-<div class="col-md-4">
+<div class="col-md-8">
    <div class="input-group" >
       <input type="text" id="roomCount" class="form-control" formControlName="roomCount" [ngClass]="{ 'is-invalid': submitted && f['roomCount'].errors }" >
       <div *ngIf="submitted && f['roomCount'].errors" class="invalid-feedback">
@@ -36,7 +40,7 @@
 </div>
 <br>
 <p> Select Room Type </p>
-<div class="col-md-4">
+<div class="col-md-8">
    <div class="input-group">
       <select class="form-control" formControlName="roomType" required>
          <option *ngFor="let type of listOfRoomType"  
@@ -50,23 +54,88 @@
 </div>
 <br>
 
+
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-4">
     <div class="input-group">
-        <button class="form-control bg-primary" type="submit">Book</button>
+        <button class="form-control bg-primary" type="submit">Search</button>
     </div>
 </div>
-<div class="col-md-2">
+<div class="col-md-4">
     <div class="input-group">
         <button type="button" class="form-control bg-primary"(click)='clearForm()'>Clear</button>
     </div>
 </div>
  </div>
- 
-    
 
 </form>
-<br>
+</div>   
+
+
+<div class="allbutton btn-group">
+  
+     
+<div *ngFor='let room of roomSearchResult;let indexOfelement=index;'>
+
+     
+      <div *ngIf="room.status; then thenTemplateName else elseTemplateName">
+        
+     </div>
+     <div id="ck-button">
+     
+   </div>
+     
+     <ng-template #thenTemplateName>
+      &nbsp; &nbsp;   <label>
+         <input class="form-check-input" (change)="onChange(room.roomNumber, $event.target.checked)" type="checkbox" id="{{room.roomNumber}}" ><span>{{room.roomNumber}}</span>
+      </label>
+     </ng-template>
+    
+     <ng-template #elseTemplateName>
+      &nbsp; &nbsp;    <label>
+         <input class="form-check-input" type="checkbox" value="room.roomNumber"  disabled><span>{{room.roomNumber}}</span>
+      </label>
+     </ng-template>
+     
+     
+ </div>
+ <div *ngIf="submitted; then showButton">
+        
+</div>
+<ng-template #showButton>
+ <div class="col-md-4" >
+ <button class="btn btn-primary"  (click)='bookRoom()' >Book</button>
+</div>
+</ng-template>
+
+</div>
+
+
+ <br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
