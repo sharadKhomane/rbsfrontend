@@ -6,6 +6,7 @@ import { RoomerviceService } from '../roomservice.service';
 import { RoomInfoDTO } from './RoomInfoDTO';
 import { Injectable } from '@angular/core';
 import { AddDetails } from './AddDetails';
+import { RegisterReponseModel } from '../model/RegisterReponseModel';
 
 declare var $: (arg0: any) => { (): any; new(): any; modal: { (arg0: string): void; new(): any; }; };
 @Component({
@@ -83,14 +84,18 @@ export class RoomdetailsComponent implements OnInit {
   
    this.addDetails.rTypes=this.addRoomForm.get("selectRoomType").value;
    this.addDetails.roomNumber=this.addRoomForm.get("roomNumber").value;
-   this.roomerviceServiceObj.addRoomNumber(this.addDetails).subscribe((response: any) => {
-    if(response==true)    
+   this.roomerviceServiceObj.addRoomNumber(this.addDetails).subscribe((response: RegisterReponseModel) => {
+    if(response.result==true)    
      {
        $(this.someModal.nativeElement).modal('hide'); 
        this.getAllRoom();
        this.router.navigateByUrl('/roomDetails')
        
      } 
+     else
+     {
+      alert(response.message);
+     }
    },
       (  error: any) => {
     console.log(error);

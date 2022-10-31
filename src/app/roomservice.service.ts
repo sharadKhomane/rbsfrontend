@@ -8,6 +8,7 @@ import { RoomInfoDTO } from './roomdetails/RoomInfoDTO';
 import { AddDetails } from './roomdetails/AddDetails';
 import { BookedInfo } from './room/BookedDetails';
 import { SearchBookResult } from './room/SearchBookResult';
+import { RegisterReponseModel } from './model/RegisterReponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,8 @@ headers={
    {
     return this.http.post<roomDetails[]>(this.url+"/addBookDetails",objRoom);
    }
-   public addRoomInfo(roomTypeObj: roomType) {
-    return this.http.post<any>(this.url+"/rbs/addRoomType",roomTypeObj);
+   public addRoomInfo(roomTypeObj: roomType):Observable<RegisterReponseModel>  {
+    return this.http.post<RegisterReponseModel>(this.url+"/rbs/addRoomType",roomTypeObj);
   }
   deleteRoomType(roomTypeId: number) {
     return this.http.delete<any>(this.url+"/rbs/deleteRoomType/" + roomTypeId);
@@ -43,8 +44,8 @@ headers={
     return this.http.get<RoomInfoDTO[]>(this.url+"/allRoom");
     
   }
-  addRoomNumber(addDetails: AddDetails) {
-    return this.http.post<any>(this.url+"/addRoom",addDetails);
+  addRoomNumber(addDetails: AddDetails):Observable<RegisterReponseModel> {
+    return this.http.post<RegisterReponseModel>(this.url+"/addRoom",addDetails);
   }
 
   deleteRoom(roomId: number) {
